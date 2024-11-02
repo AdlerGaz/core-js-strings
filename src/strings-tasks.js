@@ -429,8 +429,17 @@ function findLongestWord(sentence) {
  *   reverseWords('Hello World') => 'olleH dlroW'
  *   reverseWords('The Quick Brown Fox') => 'ehT kciuQ nworB xoF'
  */
-function reverseWords(/* str */) {
-  throw new Error('Not implemented');
+function reverseWords(str) {
+  if (str) {
+    const arrReverse = [];
+
+    str.split(' ').forEach((word) => {
+      arrReverse.push(word.split('').reverse().join(''));
+    });
+
+    return arrReverse.join(' ');
+  }
+  return '';
 }
 
 /**
@@ -444,8 +453,20 @@ function reverseWords(/* str */) {
  *   invertCase('JavaScript is Fun') => 'jAVAsCRIPT IS fUN'
  *   invertCase('12345') => '12345'
  */
-function invertCase(/* str */) {
-  throw new Error('Not implemented');
+function invertCase(str) {
+  if (str) {
+    let invertStr = '';
+
+    for (let i = 0; i < str.length; i += 1) {
+      if (str[i] === str[i].toUpperCase()) {
+        invertStr += str[i].toLowerCase();
+      } else {
+        invertStr += str[i].toUpperCase();
+      }
+    }
+    return invertStr;
+  }
+  return '';
 }
 
 /**
@@ -461,8 +482,8 @@ function invertCase(/* str */) {
  *   getStringFromTemplate('John','Doe') => 'Hello, John Doe!'
  *   getStringFromTemplate('Chuck','Norris') => 'Hello, Chuck Norris!'
  */
-function getStringFromTemplate(/* firstName, lastName */) {
-  throw new Error('Not implemented');
+function getStringFromTemplate(firstName, lastName) {
+  return `Hello, ${firstName} ${lastName}!`;
 }
 
 /**
@@ -475,8 +496,8 @@ function getStringFromTemplate(/* firstName, lastName */) {
  *   extractNameFromTemplate('Hello, John Doe!') => 'John Doe'
  *   extractNameFromTemplate('Hello, Chuck Norris!') => 'Chuck Norris'
  */
-function extractNameFromTemplate(/* value */) {
-  throw new Error('Not implemented');
+function extractNameFromTemplate(value) {
+  return value.slice(7, value.length - 1);
 }
 
 /**
@@ -490,8 +511,8 @@ function extractNameFromTemplate(/* value */) {
  *   unbracketTag('<span>') => 'span'
  *   unbracketTag('<a>') => 'a'
  */
-function unbracketTag(/* str */) {
-  throw new Error('Not implemented');
+function unbracketTag(str) {
+  return str.slice(1, str.length - 1);
 }
 
 /**
@@ -509,8 +530,8 @@ function unbracketTag(/* str */) {
  *   ],
  *   'info@gmail.com' => ['info@gmail.com']
  */
-function extractEmails(/* str */) {
-  throw new Error('Not implemented');
+function extractEmails(str) {
+  return str.split(';');
 }
 
 /**
@@ -529,8 +550,26 @@ function extractEmails(/* str */) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+function encodeToRot13(str) {
+  const strAlphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+  const strCodeAlphabet =
+    'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm';
+  let tempChar = '';
+  let resultStr = '';
+  let index;
+
+  for (let i = 0; i < str.length; i += 1) {
+    tempChar = str[i];
+
+    if (strAlphabet.includes(tempChar)) {
+      index = strAlphabet.indexOf(tempChar);
+      resultStr += strCodeAlphabet[index];
+    } else {
+      resultStr += str[i];
+    }
+  }
+
+  return resultStr;
 }
 
 /**
@@ -557,8 +596,69 @@ function encodeToRot13(/* str */) {
  *   'Q♠' => 50
  *   'K♠' => 51
  */
-function getCardId(/* value */) {
-  throw new Error('Not implemented');
+function getCardId(value) {
+  let index;
+
+  switch (value[0]) {
+    case 'A':
+      index = 0;
+      break;
+    case '2':
+      index = 1;
+      break;
+    case '3':
+      index = 2;
+      break;
+    case '4':
+      index = 3;
+      break;
+    case '5':
+      index = 4;
+      break;
+    case '6':
+      index = 5;
+      break;
+    case '7':
+      index = 6;
+      break;
+    case '8':
+      index = 7;
+      break;
+    case '9':
+      index = 8;
+      break;
+    case '1':
+      index = 9;
+      break;
+    case 'J':
+      index = 10;
+      break;
+    case 'Q':
+      index = 11;
+      break;
+    case 'K':
+      index = 12;
+      break;
+    default:
+      break;
+  }
+
+  switch (value[value.length - 1]) {
+    case '♣':
+      break;
+    case '♦':
+      index += 13;
+      break;
+    case '♥':
+      index += 13 * 2;
+      break;
+    case '♠':
+      index += 13 * 3;
+      break;
+    default:
+      break;
+  }
+  return index;
 }
 
 module.exports = {
